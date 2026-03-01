@@ -3,8 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% set site_name = "Gill's Plumbing & Mechanical" %}
+  {% set page_title = "Gill's Plumbing & Mechanical | Expert Plumbing Services" %}
+  {% set page_description = "Expert plumbing solutions for homes and businesses in Lebanon, Lancaster, and surrounding Pennsylvania areas. Book online instantly." %}
+  {% set canonical_url = request.url %}
+  {% set og_image_url = request.url_root.rstrip('/') ~ url_for('static', filename='images/gills-truck.webp') %}
   <title>Gill's Plumbing & Mechanical | Expert Plumbing Services</title>
-  <meta name="description" content="Expert plumbing solutions for homes & businesses in Lebanon, Lancaster, and surrounding PA areas. Book online instantly!" />
+  <meta name="description" content="{{ page_description }}" />
+  <meta name="keywords" content="plumber lebanon pa, plumber lancaster pa, emergency plumbing, drain cleaning, water heater repair, sump pump service, sewer line repair" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="{{ site_name }}" />
+  <link rel="canonical" href="{{ canonical_url }}" />
+  <link rel="icon" type="image/webp" href="{{ url_for('static', filename='images/gills-plumbing-logo.webp') }}" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{{ site_name }}" />
+  <meta property="og:title" content="{{ page_title }}" />
+  <meta property="og:description" content="{{ page_description }}" />
+  <meta property="og:url" content="{{ canonical_url }}" />
+  <meta property="og:image" content="{{ og_image_url }}" />
+  <meta property="og:image:alt" content="Gill's Plumbing & Mechanical service truck" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ page_title }}" />
+  <meta name="twitter:description" content="{{ page_description }}" />
+  <meta name="twitter:image" content="{{ og_image_url }}" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -283,12 +306,56 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Plumber",
-    "name": "Gill's Plumbing & Mechanical",
-    "telephone": "+1-717-813-7478",
-    "areaServed": ["Lebanon County, PA", "Lancaster County, PA"],
-    "url": "https://example.com",
-    "priceRange": "$$"
+    "@graph": [
+      {
+        "@type": "Plumber",
+        "@id": "{{ request.url_root.rstrip('/') }}/#business",
+        "name": "{{ site_name }}",
+        "description": "{{ page_description }}",
+        "url": "{{ request.url_root.rstrip('/') }}",
+        "telephone": "+1-717-813-7478",
+        "priceRange": "$$",
+        "image": "{{ og_image_url }}",
+        "logo": "{{ request.url_root.rstrip('/') }}{{ url_for('static', filename='images/gills-plumbing-logo.webp') }}",
+        "areaServed": [
+          {"@type": "City", "name": "Lebanon"},
+          {"@type": "City", "name": "Lancaster"},
+          {"@type": "City", "name": "Lititz"},
+          {"@type": "City", "name": "Palmyra"},
+          {"@type": "City", "name": "Harrisburg"},
+          {"@type": "City", "name": "Reading"}
+        ],
+        "sameAs": [
+          "https://search.google.com/local/writereview?placeid=ChIJye-NLr1WioIRUyEcDBN7-fk"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ request.url_root.rstrip('/') }}/#website",
+        "name": "{{ site_name }}",
+        "url": "{{ request.url_root.rstrip('/') }}",
+        "publisher": {
+          "@id": "{{ request.url_root.rstrip('/') }}/#business"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ canonical_url }}#webpage",
+        "url": "{{ canonical_url }}",
+        "name": "{{ page_title }}",
+        "description": "{{ page_description }}",
+        "isPartOf": {
+          "@id": "{{ request.url_root.rstrip('/') }}/#website"
+        },
+        "about": {
+          "@id": "{{ request.url_root.rstrip('/') }}/#business"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "{{ og_image_url }}"
+        }
+      }
+    ]
   }
   </script>
 </head>
