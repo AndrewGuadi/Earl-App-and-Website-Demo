@@ -297,6 +297,51 @@
     .toast { border-radius: 0.35rem; }
     .flash-alert { border-radius: 0.35rem; }
 
+    /* Emergency bar mobile cleanup */
+    #emergency-bar .emergency-inner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    #emergency-bar .emergency-copy {
+      display: inline;
+    }
+    @media (max-width: 640px) {
+      #emergency-bar {
+        padding-top: 0.55rem;
+        padding-bottom: 0.55rem;
+      }
+      #emergency-bar .emergency-inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.35rem;
+        line-height: 1.25;
+      }
+      #emergency-bar .emergency-icon {
+        display: none;
+      }
+      #emergency-bar .emergency-copy {
+        text-align: center;
+        font-size: 0.72rem;
+        letter-spacing: 0.03em;
+      }
+      #emergency-bar .emergency-phone {
+        font-size: 0.95rem;
+        font-weight: 800;
+      }
+      #emergency-mode-btn {
+        margin-left: 0 !important;
+        width: 100%;
+        max-width: 240px;
+        justify-content: center;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+      }
+    }
+
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -366,10 +411,10 @@
 
   <!-- Top Announcement Bar -->
   <div id="emergency-bar" class="bg-accent text-white py-2 px-4 text-center text-sm font-semibold tracking-wide">
-    <span class="inline-flex items-center justify-center gap-2">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-      24/7 EMERGENCY SERVICE AVAILABLE IN LEBANON AND LANCASTER COUNTIES. CALL NOW:
-      <a href="tel:7178137478" class="underline hover:text-rose-100">(717) 813-7478</a>
+    <span class="emergency-inner">
+      <svg class="w-4 h-4 emergency-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+      <span class="emergency-copy">24/7 EMERGENCY SERVICE AVAILABLE IN LEBANON AND LANCASTER COUNTIES. CALL NOW:</span>
+      <a href="tel:7178137478" class="underline hover:text-rose-100 emergency-phone">(717) 813-7478</a>
       <button id="emergency-mode-btn" class="ml-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 hover:bg-white/20 border border-white/20 kinetic">
         <span class="text-xs font-black uppercase tracking-wider">Emergency Mode</span>
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-white animate-[pulse_1.4s_ease-in-out_infinite]"></span>
