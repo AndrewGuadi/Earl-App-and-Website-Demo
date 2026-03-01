@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f7fb; margin: 0; color: #1f2937; }
+    .top { background: #0b2a4a; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .top a { color: #fff; text-decoration: none; font-weight: 700; }
+    .wrap { max-width: 1120px; margin: 24px auto; padding: 0 16px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card { background: #fff; border: 1px solid #dbe1ea; border-radius: 12px; padding: 16px; }
+    h2 { margin: 0 0 12px; }
+    h3 { margin: 0 0 8px; }
+    .flash { margin: 0 0 10px; padding: 10px; border-radius: 8px; border: 1px solid #bfd9bf; background: #f3fff3; color: #205c20; }
+    .flash.error { border-color: #d9b6b6; background: #fff1f1; color: #7d1f1f; }
+    .row { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+    label { display: block; margin: 8px 0 6px; font-weight: 700; }
+    input, select { padding: 8px; border: 1px solid #c6cfdb; border-radius: 8px; }
+    button { border: none; background: #0b2a4a; color: #fff; padding: 8px 10px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { text-align: left; border-bottom: 1px solid #e5eaf1; padding: 8px; font-size: 14px; }
+    .muted { color: #667084; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div><strong>Admin Dashboard</strong></div>
+    <div><a href="{{ url_for('admin_logout') }}">Logout</a></div>
+  </div>
+
+  <div class="wrap">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {% if category == 'error' %}error{% endif %}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="grid">
+      <div class="card">
+        <h2>Service Categories</h2>
+        <p class="muted">Set service type and how many minutes it blocks on the calendar.</p>
+        <form method="post" action="{{ url_for('admin_add_category') }}">
+          <div class="row">
+            <div>
+              <label for="name">Category Name</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+            <div>
+              <label for="duration_minutes">Duration (minutes)</label>
+              <input id="duration_minutes" name="duration_minutes" type="number" min="15" step="15" required />
+            </div>
+            <div>
+              <button type="submit">Add Category</button>
+            </div>
+          </div>
+        </form>
+
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Duration</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            {% for c in categories %}
+            <tr>
+              <td>{{ c.name }}</td>
+              <td>{{ c.duration_minutes }} min</td>
+              <td>{{ 'Active' if c.is_active else 'Inactive' }}</td>
+              <td>
+                <form method="post" action="{{ url_for('admin_toggle_category', category_id=c.id) }}">
+                  <button type="submit">{{ 'Disable' if c.is_active else 'Enable' }}</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Calendar Availability</h2>
+        <p class="muted">Control which day/time start slots users can select.</p>
+        <form method="post" action="{{ url_for('admin_add_slot') }}">
+          <div class="row">
+            <div>
+              <label for="weekday">Weekday</label>
+              <select id="weekday" name="weekday" required>
+                {% for name in weekday_names %}
+                  <option value="{{ loop.index0 }}">{{ name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div>
+              <label for="start_time">Start Time (24h)</label>
+              <input id="start_time" name="start_time" type="time" required />
+            </div>
+            <div>
+              <button type="submit">Add Slot</button>
+            </div>
+          </div>
+        </form>
+
+        <table>
+          <thead>
+            <tr><th>Day</th><th>Time</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            {% for s in slots %}
+            <tr>
+              <td>{{ weekday_names[s.weekday] }}</td>
+              <td>{{ s.start_time }}</td>
+              <td>{{ 'Active' if s.is_active else 'Inactive' }}</td>
+              <td>
+                <form method="post" action="{{ url_for('admin_toggle_slot', slot_id=s.id) }}">
+                  <button type="submit">{{ 'Disable' if s.is_active else 'Enable' }}</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Coupons</h2>
+      <p class="muted">Create homepage coupons from backend. Upload an image optionally instead of text-heavy coupon content.</p>
+      <form method="post" action="{{ url_for('admin_add_coupon') }}" enctype="multipart/form-data">
+        <div class="row">
+          <div>
+            <label for="coupon-title">Title</label>
+            <input id="coupon-title" name="title" type="text" required />
+          </div>
+          <div>
+            <label for="coupon-code">Code (optional)</label>
+            <input id="coupon-code" name="code" type="text" />
+          </div>
+          <div>
+            <label for="coupon-image">Image (optional)</label>
+            <input id="coupon-image" name="image" type="file" accept=".png,.jpg,.jpeg,.webp,.gif" />
+          </div>
+        </div>
+        <div style="margin-top:8px;">
+          <label for="coupon-description">Description (optional)</label>
+          <input id="coupon-description" name="description" type="text" />
+        </div>
+        <div style="margin-top:10px;">
+          <button type="submit">Add Coupon</button>
+        </div>
+      </form>
+
+      <table>
+        <thead>
+          <tr><th>Title</th><th>Code</th><th>Image</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          {% for c in coupons %}
+          <tr>
+            <td>{{ c.title }}</td>
+            <td>{{ c.code or '-' }}</td>
+            <td>{{ 'Yes' if c.image_filename else 'No' }}</td>
+            <td>{{ 'Active' if c.is_active else 'Inactive' }}</td>
+            <td>
+              <form method="post" action="{{ url_for('admin_toggle_coupon', coupon_id=c.id) }}">
+                <button type="submit">{{ 'Disable' if c.is_active else 'Enable' }}</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

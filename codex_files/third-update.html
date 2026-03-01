@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gill's Plumbing & Mechanical | Expert Plumbing Services</title>
+  <meta name="description" content="Expert plumbing solutions for homes & businesses in Lebanon, Lancaster, and surrounding PA areas. Book online instantly!" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0B2A4A',      /* deeper navy */
+            secondary: '#153D6A',
+            accent: '#E11D48',       /* contrast-safe rose */
+            accentHover: '#BE123C',
+            ink: '#0B1220',
+            paper: '#F7FAFC',
+          },
+          fontFamily: {
+            heading: ['Montserrat', 'sans-serif'],
+            body: ['Poppins', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2,6,23,0.10)',
+            lift: '0 18px 50px rgba(2,6,23,0.16)',
+            glass: '0 18px 60px rgba(2,6,23,0.22)',
+          },
+          keyframes: {
+            floaty: {
+              '0%,100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' }
+            },
+            shimmer: {
+              '0%': { transform: 'translateX(-120%)' },
+              '100%': { transform: 'translateX(120%)' }
+            },
+            inUp: {
+              '0%': { opacity: '0', transform: 'translateY(18px) scale(0.985)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+            inLeft: {
+              '0%': { opacity: '0', transform: 'translateX(-18px) scale(0.985)' },
+              '100%': { opacity: '1', transform: 'translateX(0) scale(1)' },
+            },
+            pulseRed: {
+              '0%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(225,29,72,0.55)' },
+              '70%': { transform: 'scale(1)', boxShadow: '0 0 0 12px rgba(225,29,72,0)' },
+              '100%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(225,29,72,0)' },
+            }
+          },
+          animation: {
+            floaty: 'floaty 5s ease-in-out infinite',
+            shimmer: 'shimmer 1.6s ease-in-out infinite',
+            inUp: 'inUp 700ms cubic-bezier(.18,.9,.2,1) both',
+            inLeft: 'inLeft 700ms cubic-bezier(.18,.9,.2,1) both',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root{
+      --grain-opacity: 0.10;
+      --glass: rgba(255,255,255,0.60);
+      --glassBorder: rgba(255,255,255,0.30);
+      --glassDark: rgba(2,6,23,0.55);
+      --glassBorderDark: rgba(148,163,184,0.18);
+      --ring: rgba(225,29,72,0.35);
+    }
+
+    body { font-family: "Poppins", sans-serif; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4,h5,h6 { font-family: "Montserrat", sans-serif; }
+
+    /* Subtle grain overlay, 2026 depth texture */
+    .grain::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: var(--grain-opacity);
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    /* Hero: layered cinematic */
+    .hero-bg {
+      background:
+        radial-gradient(900px 520px at 18% 28%, rgba(225,29,72,0.30), transparent 60%),
+        radial-gradient(1000px 640px at 76% 20%, rgba(59,130,246,0.24), transparent 55%),
+        linear-gradient(rgba(2,6,23,0.65), rgba(2,6,23,0.78)),
+        url("https://images.unsplash.com/photo-1585704032915-c3400ca199e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")
+        center/cover no-repeat;
+    }
+
+    /* Glass nav */
+    .glassbar{
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: var(--glass);
+      border: 1px solid var(--glassBorder);
+      box-shadow: 0 18px 60px rgba(2,6,23,0.18);
+    }
+    .dark .glassbar{
+      background: var(--glassDark);
+      border-color: var(--glassBorderDark);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+    }
+
+    /* Spring-ish kinetic feel using better easing */
+    .kinetic {
+      transition: transform 320ms cubic-bezier(.16,1,.3,1), box-shadow 320ms cubic-bezier(.16,1,.3,1), background 320ms cubic-bezier(.16,1,.3,1);
+      will-change: transform;
+    }
+    .kinetic:active { transform: translateY(1px) scale(0.98); }
+
+    /* Magnetic hover uses JS to set transform, keep fallback */
+    .magnetic { transform: translate3d(0,0,0); }
+
+    /* Reveal system */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+    }
+    .reveal.is-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition: opacity 700ms cubic-bezier(.18,.9,.2,1), transform 700ms cubic-bezier(.18,.9,.2,1);
+    }
+    .reveal.is-in[data-stagger] { transition-delay: var(--delay, 0ms); }
+
+    /* Floating section panels */
+    .panel {
+      border: 1px solid rgba(148,163,184,0.18);
+      box-shadow: 0 12px 40px rgba(2,6,23,0.10);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dark .panel{
+      background: rgba(2,6,23,0.60);
+      border-color: rgba(148,163,184,0.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+    }
+
+    /* Live dot */
+    .live-dot {
+      width: 10px; height: 10px;
+      background-color: #E11D48;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulseRed 2s infinite;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: rgba(148,163,184,0.12); }
+    ::-webkit-scrollbar-thumb { background: rgba(30,64,175,0.38); border-radius: 6px; }
+    .dark ::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.28); }
+
+    /* Calendar */
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      border: 1px solid rgba(148,163,184,0.18);
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 240ms cubic-bezier(.16,1,.3,1), background 240ms cubic-bezier(.16,1,.3,1), border 240ms cubic-bezier(.16,1,.3,1);
+    }
+    .dark .calendar-day{
+      background: rgba(2,6,23,0.45);
+      border-color: rgba(148,163,184,0.16);
+    }
+    .calendar-day:not(.disabled):not(.empty):hover {
+      transform: translateY(-2px);
+      border-color: rgba(225,29,72,0.35);
+    }
+    .calendar-day.selected {
+      background: rgba(11,42,74,0.92);
+      color: white;
+      border-color: rgba(225,29,72,0.35);
+      box-shadow: 0 18px 50px rgba(2,6,23,0.20);
+    }
+    .calendar-day.disabled { opacity: 0.35; cursor: not-allowed; }
+    .calendar-day.empty { opacity: 0; cursor: default; border: none; background: transparent; }
+
+    /* Time slots */
+    .time-slot.selected {
+      background: rgba(11,42,74,0.92);
+      color: white;
+      border-color: rgba(225,29,72,0.35);
+      box-shadow: 0 18px 50px rgba(2,6,23,0.20);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: rgba(2,6,23,0.92);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Plumber",
+    "name": "Gill's Plumbing & Mechanical",
+    "telephone": "+1-717-813-7478",
+    "areaServed": ["Lebanon County, PA", "Lancaster County, PA"],
+    "url": "https://example.com",
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+
+<body class="grain bg-paper text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Top Announcement Bar -->
+  <div id="emergency-bar" class="bg-accent text-white py-2 px-4 text-center text-sm font-semibold tracking-wide">
+    <span class="inline-flex items-center justify-center gap-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+      24/7 EMERGENCY SERVICE AVAILABLE IN LEBANON AND LANCASTER COUNTIES. CALL NOW:
+      <a href="tel:7178137478" class="underline hover:text-rose-100">(717) 813-7478</a>
+      <button id="emergency-mode-btn" class="ml-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 hover:bg-white/20 border border-white/20 kinetic">
+        <span class="text-xs font-black uppercase tracking-wider">Emergency Mode</span>
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-white animate-[pulse_1.4s_ease-in-out_infinite]"></span>
+      </button>
+    </span>
+  </div>
+
+  <!-- Floating Glass Navigation -->
+  <div class="sticky top-3 z-50 px-3 sm:px-6 lg:px-8">
+    <nav class="glassbar max-w-7xl mx-auto rounded-2xl">
+      <div class="px-4 sm:px-6">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-primary text-white flex items-center justify-center shadow-soft">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <div class="leading-tight">
+              <div class="font-heading font-black text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white uppercase">Gill's Plumbing</div>
+              <div class="text-[10px] font-semibold tracking-[0.26em] uppercase text-slate-500 dark:text-slate-300">and Mechanical</div>
+            </div>
+          </a>
+
+          <!-- Desktop menu -->
+          <div class="hidden md:flex items-center gap-7">
+            <a href="#services" class="text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white font-semibold transition">Services</a>
+            <a href="#current-jobs" class="text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white font-semibold transition">Live Jobs</a>
+            <a href="#coupons" id="nav-coupons" class="text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white font-semibold transition">Coupons</a>
+            <a href="#reviews" id="nav-reviews" class="text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white font-semibold transition">Reviews</a>
+
+            <!-- Dark toggle -->
+            <button id="theme-toggle" class="kinetic magnetic rounded-xl px-3 py-2 border border-slate-200/60 dark:border-slate-700/60 bg-white/30 dark:bg-slate-900/30">
+              <span class="sr-only">Toggle dark mode</span>
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-800 dark:text-slate-100">
+                <svg id="sun" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0l-1.414-1.414M7.05 7.05 5.636 5.636M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+                <svg id="moon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path></svg>
+                <span class="hidden lg:inline">Theme</span>
+              </div>
+            </button>
+
+            <!-- Primary CTA -->
+            <a href="#book-online" class="kinetic magnetic relative overflow-hidden bg-primary text-white px-5 py-2.5 rounded-xl font-black uppercase tracking-wide shadow-lift">
+              <span class="relative z-10">Book Online</span>
+              <span class="absolute inset-0 opacity-50">
+                <span class="absolute top-0 left-0 w-[60%] h-full bg-white/20 skew-x-[-20deg] animate-shimmer"></span>
+              </span>
+            </a>
+
+            <!-- Emergency CTA -->
+            <a href="tel:7178137478" class="kinetic magnetic bg-accent text-white px-5 py-2.5 rounded-xl font-black uppercase tracking-wide shadow-lift hover:bg-accentHover">
+              Call Now
+            </a>
+          </div>
+
+          <!-- Mobile -->
+          <div class="flex md:hidden items-center gap-2">
+            <button id="theme-toggle-mobile" class="kinetic rounded-xl px-3 py-2 border border-slate-200/60 dark:border-slate-700/60 bg-white/30 dark:bg-slate-900/30">
+              <span class="sr-only">Toggle dark mode</span>
+              <svg class="w-5 h-5 text-slate-800 dark:text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path></svg>
+            </button>
+            <button id="mobile-menu-btn" class="kinetic rounded-xl px-3 py-2 border border-slate-200/60 dark:border-slate-700/60 bg-white/30 dark:bg-slate-900/30" aria-expanded="false" aria-controls="mobile-menu">
+              <svg class="w-6 h-6 text-slate-800 dark:text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+          <div class="grid grid-cols-2 gap-2 pt-2">
+            <a class="mobile-link kinetic rounded-xl px-4 py-3 bg-white/30 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-700/60 font-bold" href="#services">Services</a>
+            <a class="mobile-link kinetic rounded-xl px-4 py-3 bg-white/30 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-700/60 font-bold" href="#current-jobs">Live Jobs</a>
+            <a id="mobile-coupons" class="mobile-link kinetic rounded-xl px-4 py-3 bg-white/30 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-700/60 font-bold" href="#coupons">Coupons</a>
+            <a id="mobile-reviews" class="mobile-link kinetic rounded-xl px-4 py-3 bg-white/30 dark:bg-slate-900/30 border border-slate-200/60 dark:border-slate-700/60 font-bold" href="#reviews">Reviews</a>
+            <a class="mobile-link kinetic col-span-2 rounded-xl px-4 py-3 bg-primary text-white font-black uppercase tracking-wide text-center" href="#book-online">Book Online</a>
+            <a class="mobile-link kinetic col-span-2 rounded-xl px-4 py-3 bg-accent text-white font-black uppercase tracking-wide text-center" href="tel:7178137478">Call Now</a>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero-bg relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <div class="reveal is-in animate-inLeft">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white backdrop-blur-md">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/15">★</span>
+              <span class="text-sm font-black uppercase tracking-wider">5 Star Rated Local Plumbing</span>
+            </div>
+
+            <h1 class="mt-6 font-heading font-black text-white leading-[0.95] text-5xl sm:text-6xl lg:text-7xl">
+              Plumbing that feels
+              <span class="text-accent">immediate</span>
+              and
+              <span class="text-white">professional</span>.
+            </h1>
+
+            <p class="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl">
+              Book online in under a minute. Live job feed. Fast dispatch. Clean workmanship. Clear communication.
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-3">
+              <a href="#book-online" class="kinetic magnetic relative overflow-hidden bg-white text-slate-950 px-7 py-4 rounded-2xl font-black uppercase tracking-wide shadow-glass">
+                <span class="relative z-10">Book Online Now</span>
+                <span class="absolute inset-0 opacity-50">
+                  <span class="absolute top-0 left-0 w-[60%] h-full bg-slate-950/10 skew-x-[-20deg] animate-shimmer"></span>
+                </span>
+              </a>
+              <a href="tel:7178137478" class="kinetic magnetic bg-accent text-white px-7 py-4 rounded-2xl font-black uppercase tracking-wide shadow-glass hover:bg-accentHover">
+                Call (717) 813-7478
+              </a>
+              <button id="hero-emergency-mode" class="kinetic magnetic px-7 py-4 rounded-2xl font-black uppercase tracking-wide border border-white/20 bg-white/10 text-white hover:bg-white/15">
+                Emergency Mode
+              </button>
+            </div>
+
+            <div class="mt-10 flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/15 text-white/90">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path></svg>
+                Upfront pricing
+              </span>
+              <span class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/15 text-white/90">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"></path></svg>
+                Same-day availability
+              </span>
+              <span class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/15 text-white/90">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Licensed and insured
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero side panel -->
+        <div class="lg:col-span-5">
+          <div class="reveal panel rounded-3xl p-6 sm:p-7 text-slate-900 dark:text-slate-100">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Dispatch Status</p>
+                <h3 class="mt-2 text-2xl font-heading font-black">Live Availability</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="live-dot"></span>
+                <span class="text-sm font-black uppercase tracking-wide text-slate-700 dark:text-slate-200">Live</span>
+              </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 gap-3">
+              <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/30 p-4">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <p class="text-sm font-black">Fast booking</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">Choose a service, date, time</p>
+                  </div>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black border border-slate-200/70 dark:border-slate-700/60 bg-white/30 dark:bg-slate-900/30">
+                    60 sec
+                  </span>
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/30 p-4">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <p class="text-sm font-black">Emergency response</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">Call now for fastest dispatch</p>
+                  </div>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black border border-rose-200/70 dark:border-rose-400/20 bg-rose-50/60 dark:bg-rose-500/10 text-rose-700 dark:text-rose-200">
+                    24/7
+                  </span>
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/30 p-4">
+                <p class="text-sm font-black">Service areas</p>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                  Lebanon County, Lancaster County, and nearby towns.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <a href="#book-online" class="kinetic magnetic block text-center bg-primary text-white py-3.5 rounded-2xl font-black uppercase tracking-wide shadow-lift">
+                Start Online Booking
+              </a>
+              <p class="mt-3 text-xs text-slate-500 dark:text-slate-300">
+                Booking requests are confirmed by phone or text as soon as possible.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Emergency morph insert target -->
+  <div id="emergency-insert" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
+
+  <!-- BOOKING -->
+  <section id="book-online" class="py-16 sm:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Schedule Service</p>
+        <h2 class="mt-3 text-4xl sm:text-5xl font-heading font-black text-slate-950 dark:text-white">Book Online in One Minute</h2>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Springy UI, instant feedback, and a clean summary before you submit.</p>
+      </div>
+
+      <div class="mt-10 reveal panel rounded-3xl overflow-hidden">
+        <!-- Progress -->
+        <div class="px-6 py-5 border-b border-slate-200/60 dark:border-slate-700/50 bg-white/30 dark:bg-slate-900/25">
+          <div class="relative">
+            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200/70 dark:bg-slate-700/50 rounded-full"></div>
+            <div id="progress-bar" class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-primary rounded-full transition-all duration-300 w-0"></div>
+
+            <div class="relative flex items-center justify-between">
+              <div class="step-indicator flex flex-col items-center" data-step="1">
+                <div class="w-9 h-9 rounded-2xl bg-primary text-white flex items-center justify-center font-black border border-white/20 shadow-soft">1</div>
+                <span class="text-xs font-black mt-2 text-primary dark:text-white uppercase tracking-wide">Service</span>
+              </div>
+              <div class="step-indicator flex flex-col items-center" data-step="2">
+                <div class="w-9 h-9 rounded-2xl bg-slate-200/80 dark:bg-slate-700/60 text-slate-600 dark:text-slate-200 flex items-center justify-center font-black border border-white/10 shadow-soft">2</div>
+                <span class="text-xs font-black mt-2 text-slate-400 uppercase tracking-wide">Time</span>
+              </div>
+              <div class="step-indicator flex flex-col items-center" data-step="3">
+                <div class="w-9 h-9 rounded-2xl bg-slate-200/80 dark:bg-slate-700/60 text-slate-600 dark:text-slate-200 flex items-center justify-center font-black border border-white/10 shadow-soft">3</div>
+                <span class="text-xs font-black mt-2 text-slate-400 uppercase tracking-wide">Details</span>
+              </div>
+              <div class="step-indicator flex flex-col items-center" data-step="4">
+                <div class="w-9 h-9 rounded-2xl bg-slate-200/80 dark:bg-slate-700/60 text-slate-600 dark:text-slate-200 flex items-center justify-center font-black border border-white/10 shadow-soft">4</div>
+                <span class="text-xs font-black mt-2 text-slate-400 uppercase tracking-wide">Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-10">
+          <!-- Step 1 -->
+          <div id="booking-step-1" class="step-container active">
+            <h3 class="text-xl sm:text-2xl font-heading font-black text-slate-950 dark:text-white">What do you need help with?</h3>
+            <p class="mt-2 text-slate-600 dark:text-slate-300">Pick one. The UI will adapt on the next step.</p>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- card radio -->
+              <label class="kinetic cursor-pointer rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-5 hover:shadow-soft">
+                <div class="flex items-start gap-3">
+                  <input class="mt-1 w-5 h-5 accent-[#0B2A4A]" type="radio" name="service" value="Emergency Leak Repair" />
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-sm font-black text-slate-950 dark:text-white">Emergency Leak Repair</span>
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-black border border-rose-200/70 dark:border-rose-400/20 bg-rose-50/70 dark:bg-rose-500/10 text-rose-700 dark:text-rose-200">Urgent</span>
+                    </div>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Active leak, flooding, burst pipe</p>
+                  </div>
+                </div>
+              </label>
+
+              <label class="kinetic cursor-pointer rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-5 hover:shadow-soft">
+                <div class="flex items-start gap-3">
+                  <input class="mt-1 w-5 h-5 accent-[#0B2A4A]" type="radio" name="service" value="Drain Cleaning" />
+                  <div>
+                    <span class="text-sm font-black text-slate-950 dark:text-white">Drain Cleaning</span>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Clogged sinks, toilets, showers, main lines</p>
+                  </div>
+                </div>
+              </label>
+
+              <label class="kinetic cursor-pointer rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-5 hover:shadow-soft">
+                <div class="flex items-start gap-3">
+                  <input class="mt-1 w-5 h-5 accent-[#0B2A4A]" type="radio" name="service" value="Water Heater Service" />
+                  <div>
+                    <span class="text-sm font-black text-slate-950 dark:text-white">Water Heater Service</span>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">No hot water, leaks, replacement options</p>
+                  </div>
+                </div>
+              </label>
+
+              <label class="kinetic cursor-pointer rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-5 hover:shadow-soft">
+                <div class="flex items-start gap-3">
+                  <input class="mt-1 w-5 h-5 accent-[#0B2A4A]" type="radio" name="service" value="General Plumbing" />
+                  <div>
+                    <span class="text-sm font-black text-slate-950 dark:text-white">General Plumbing</span>
+                    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Faucets, toilets, pipes, remodeling</p>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+              <button id="btn-step-1" type="button" class="kinetic magnetic px-6 py-3 rounded-2xl bg-primary text-white font-black uppercase tracking-wide shadow-soft disabled:opacity-40" disabled onclick="nextStep(2)">
+                Continue
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="booking-step-2" class="step-container">
+            <div class="flex items-center gap-3">
+              <button type="button" class="kinetic rounded-xl px-3 py-2 border border-slate-200/60 dark:border-slate-700/50 bg-white/30 dark:bg-slate-900/25" onclick="prevStep(1)">
+                <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+              </button>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-heading font-black text-slate-950 dark:text-white">Select Date and Time</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300">Availability adapts based on service type and day.</p>
+              </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <button type="button" id="prev-month" class="kinetic p-2 rounded-xl bg-white/30 dark:bg-slate-900/25 border border-slate-200/60 dark:border-slate-700/50" aria-label="Previous month">
+                    <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                  </button>
+                  <h4 id="calendar-month-year" class="font-black text-lg text-slate-950 dark:text-white">Month</h4>
+                  <button type="button" id="next-month" class="kinetic p-2 rounded-xl bg-white/30 dark:bg-slate-900/25 border border-slate-200/60 dark:border-slate-700/50" aria-label="Next month">
+                    <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                  </button>
+                </div>
+
+                <div class="calendar-grid mb-2 text-center text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300">
+                  <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                </div>
+                <div id="calendar-body" class="calendar-grid"></div>
+                <p class="mt-3 text-xs text-slate-500 dark:text-slate-300">Times shown are request times. We confirm by phone or text.</p>
+              </div>
+
+              <div>
+                <div class="flex items-end justify-between">
+                  <h4 class="font-black text-lg text-slate-950 dark:text-white">
+                    Available Times
+                    <span class="block text-sm font-semibold text-slate-500 dark:text-slate-300">
+                      for <span id="display-selected-date" class="text-primary dark:text-white">...</span>
+                    </span>
+                  </h4>
+                  <a href="tel:7178137478" class="kinetic magnetic text-sm font-black text-accent hover:underline">Emergency? Call now</a>
+                </div>
+
+                <div id="time-slots-container" class="mt-4 grid grid-cols-2 gap-3">
+                  <p class="text-slate-500 dark:text-slate-300 text-sm italic col-span-2">Please select a date first.</p>
+                </div>
+
+                <div class="mt-6 rounded-3xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-5">
+                  <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-accent/10 text-accent flex items-center justify-center">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                      <p class="text-sm font-black text-slate-950 dark:text-white">Kinetic confirmation</p>
+                      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">When you pick a time, step 3 becomes available instantly.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+              <button id="btn-step-2" type="button" class="kinetic magnetic px-6 py-3 rounded-2xl bg-primary text-white font-black uppercase tracking-wide shadow-soft disabled:opacity-40" disabled onclick="nextStep(3)">
+                Continue
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div id="booking-step-3" class="step-container">
+            <div class="flex items-center gap-3">
+              <button type="button" class="kinetic rounded-xl px-3 py-2 border border-slate-200/60 dark:border-slate-700/50 bg-white/30 dark:bg-slate-900/25" onclick="prevStep(2)">
+                <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+              </button>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-heading font-black text-slate-950 dark:text-white">Your Details</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300">We confirm quickly. Make sure phone is accurate.</p>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-3xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-5">
+              <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">
+                Booking:
+                <span id="summary-service" class="font-black text-slate-950 dark:text-white"></span>
+                on
+                <span id="summary-datetime" class="font-black text-slate-950 dark:text-white"></span>
+              </p>
+            </div>
+
+            <form id="booking-form" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5" novalidate>
+              <div>
+                <label class="block text-sm font-black text-slate-700 dark:text-slate-200 mb-1">First Name *</label>
+                <input id="firstName" type="text" autocomplete="given-name" required class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/30 focus:outline-none focus:ring-4 focus:ring-[var(--ring)]" />
+                <p class="mt-1 text-xs text-accent hidden" id="err-firstName">Please enter your first name.</p>
+              </div>
+              <div>
+                <label class="block text-sm font-black text-slate-700 dark:text-slate-200 mb-1">Last Name *</label>
+                <input id="lastName" type="text" autocomplete="family-name" required class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/30 focus:outline-none focus:ring-4 focus:ring-[var(--ring)]" />
+                <p class="mt-1 text-xs text-accent hidden" id="err-lastName">Please enter your last name.</p>
+              </div>
+              <div>
+                <label class="block text-sm font-black text-slate-700 dark:text-slate-200 mb-1">Phone Number *</label>
+                <input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(717) 555-1234" class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/30 focus:outline-none focus:ring-4 focus:ring-[var(--ring)]" />
+                <p class="mt-1 text-xs text-accent hidden" id="err-phone">Please enter a valid phone number.</p>
+              </div>
+              <div>
+                <label class="block text-sm font-black text-slate-700 dark:text-slate-200 mb-1">Email Address</label>
+                <input id="email" type="email" autocomplete="email" class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/30 focus:outline-none focus:ring-4 focus:ring-[var(--ring)]" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-black text-slate-700 dark:text-slate-200 mb-1">Service Address *</label>
+                <input id="address" type="text" autocomplete="street-address" required placeholder="Street Address, City, Zip" class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/30 focus:outline-none focus:ring-4 focus:ring-[var(--ring)]" />
+                <p class="mt-1 text-xs text-accent hidden" id="err-address">Please enter the service address.</p>
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-black text-slate-700 dark:text-slate-200 mb-1">Issue Description (Optional)</label>
+                <textarea id="notes" rows="3" class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/30 focus:outline-none focus:ring-4 focus:ring-[var(--ring)] resize-none" placeholder="Tell us what is going on. Any leaks, backups, or no hot water?"></textarea>
+              </div>
+
+              <div class="md:col-span-2 flex items-start gap-3">
+                <input id="consent" type="checkbox" class="mt-1 w-4 h-4 accent-[#0B2A4A]" />
+                <p class="text-sm text-slate-600 dark:text-slate-300">
+                  You can text me about scheduling updates. Standard message rates may apply.
+                </p>
+              </div>
+
+              <div class="md:col-span-2 flex justify-end">
+                <button id="confirmBtn" type="submit" class="kinetic magnetic px-8 py-4 rounded-2xl bg-accent text-white font-black uppercase tracking-wide shadow-lift hover:bg-accentHover w-full md:w-auto">
+                  Confirm Booking
+                </button>
+              </div>
+
+              <p class="md:col-span-2 text-xs text-slate-500 dark:text-slate-300">
+                This is a booking request. We confirm availability by phone or text. For emergencies, call now.
+              </p>
+            </form>
+          </div>
+
+          <!-- Step 4 -->
+          <div id="booking-step-4" class="step-container text-center py-10">
+            <div class="w-20 h-20 bg-emerald-500/15 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-emerald-500/20">
+              <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-3xl font-heading font-black text-slate-950 dark:text-white">Request Received</h3>
+            <p class="mt-3 text-lg text-slate-600 dark:text-slate-300 max-w-lg mx-auto">
+              We received your request for <span id="success-datetime" class="font-black text-slate-950 dark:text-white"></span>.
+            </p>
+            <p class="mt-3 text-sm text-slate-500 dark:text-slate-300">
+              Need immediate help? Call <a href="tel:7178137478" class="font-black text-accent hover:underline">(717) 813-7478</a>.
+            </p>
+            <button onclick="resetBooking()" class="mt-8 kinetic magnetic px-6 py-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/40 dark:bg-slate-900/25 font-black">
+              Book Another Service
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE JOBS -->
+  <section id="current-jobs" class="py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="reveal">
+          <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Living UI</p>
+          <h2 class="mt-3 text-4xl sm:text-5xl font-heading font-black text-slate-950 dark:text-white">Live Dispatch Feed</h2>
+          <p class="mt-3 text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
+            This changes while you are here. That is intentional. It builds trust.
+          </p>
+        </div>
+        <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full panel">
+          <span class="live-dot"></span>
+          <span class="text-sm font-black uppercase tracking-wide text-slate-700 dark:text-slate-200">Live</span>
+        </div>
+      </div>
+
+      <div id="jobs-grid" class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES BENTO -->
+  <section id="services" class="py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">What We Do</p>
+        <h2 class="mt-3 text-4xl sm:text-6xl font-heading font-black text-slate-950 dark:text-white">
+          Plumbing, built like a
+          <span class="text-accent">premium system</span>.
+        </h2>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+          This is not a template grid. This is a bento layout with a featured service and supporting blocks.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Featured 2x2 -->
+        <div class="reveal panel rounded-3xl p-7 lg:col-span-7 lg:row-span-2 overflow-hidden relative">
+          <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-accent/15 blur-3xl"></div>
+            <div class="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-blue-500/10 blur-3xl"></div>
+          </div>
+
+          <div class="relative">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Featured</p>
+                <h3 class="mt-2 text-3xl sm:text-4xl font-heading font-black text-slate-950 dark:text-white">Emergency Response</h3>
+                <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-xl">
+                  Flooding, burst pipes, sewage backups. This block exists because intent matters. If you are urgent, the site should behave like it.
+                </p>
+              </div>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black border border-rose-200/70 dark:border-rose-400/20 bg-rose-50/70 dark:bg-rose-500/10 text-rose-700 dark:text-rose-200">
+                24/7
+              </span>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-4">
+                <p class="text-sm font-black text-slate-950 dark:text-white">Fast dispatch</p>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Call now or use Emergency Mode</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-4">
+                <p class="text-sm font-black text-slate-950 dark:text-white">Clear next steps</p>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Diagnosis, quote, fix, clean up</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white/40 dark:bg-slate-900/25 p-4 sm:col-span-2">
+                <p class="text-sm font-black text-slate-950 dark:text-white">Emergency checklist</p>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                  Shut off main water if possible. Avoid electrical hazards. Call now for guidance.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="tel:7178137478" class="kinetic magnetic px-7 py-4 rounded-2xl bg-accent text-white font-black uppercase tracking-wide shadow-lift hover:bg-accentHover text-center">
+                Call Emergency
+              </a>
+              <button id="services-emergency-mode" class="kinetic magnetic px-7 py-4 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/40 dark:bg-slate-900/25 font-black uppercase tracking-wide">
+                Turn On Emergency Mode
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smaller bento blocks -->
+        <div class="reveal panel rounded-3xl p-6 lg:col-span-5">
+          <h4 class="text-xl font-heading font-black text-slate-950 dark:text-white">Drain Cleaning</h4>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Snaking, clearing, and main line backups with camera inspection when needed.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-slate-300">Sinks, toilets, main lines</span>
+            <a href="#book-online" class="kinetic magnetic text-sm font-black text-primary dark:text-white hover:underline">Book</a>
+          </div>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-6 lg:col-span-5">
+          <h4 class="text-xl font-heading font-black text-slate-950 dark:text-white">Water Heaters</h4>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Repair, replacement, standard and tankless. Get hot water back quickly.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-slate-300">Repair or replace</span>
+            <a href="#book-online" class="kinetic magnetic text-sm font-black text-primary dark:text-white hover:underline">Book</a>
+          </div>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-6 lg:col-span-4">
+          <h4 class="text-xl font-heading font-black text-slate-950 dark:text-white">General Repairs</h4>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Leaks, fixtures, toilets, valves, pipe repairs.</p>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-6 lg:col-span-4">
+          <h4 class="text-xl font-heading font-black text-slate-950 dark:text-white">Sewer Camera</h4>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Find roots, breaks, and blockages with clear proof.</p>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-6 lg:col-span-4">
+          <h4 class="text-xl font-heading font-black text-slate-950 dark:text-white">Installations</h4>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">New fixtures, upgrades, remodel plumbing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUPONS -->
+  <section id="coupons" class="py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Save Money</p>
+        <h2 class="mt-3 text-4xl sm:text-5xl font-heading font-black text-slate-950 dark:text-white">Special Offers</h2>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Clip a coupon. It copies to clipboard. Fast.</p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="reveal panel rounded-3xl p-6">
+          <div class="text-accent font-heading font-black text-4xl">$50 OFF</div>
+          <div class="mt-2 text-xl font-heading font-black">Any Plumbing Repair</div>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Valid on repairs of $250 or more. Cannot combine.</p>
+          <div class="mt-5 rounded-2xl bg-white/40 dark:bg-slate-900/25 border border-slate-200/60 dark:border-slate-700/50 p-3 font-mono font-black text-center">SAVE50</div>
+          <button data-coupon="SAVE50" class="clip-coupon kinetic magnetic mt-4 w-full px-4 py-3 rounded-2xl bg-primary text-white font-black uppercase tracking-wide">Clip</button>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-6">
+          <div class="text-accent font-heading font-black text-4xl">$100 OFF</div>
+          <div class="mt-2 text-xl font-heading font-black">Water Heater Install</div>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Standard or tankless installation discount.</p>
+          <div class="mt-5 rounded-2xl bg-white/40 dark:bg-slate-900/25 border border-slate-200/60 dark:border-slate-700/50 p-3 font-mono font-black text-center">HOT100</div>
+          <button data-coupon="HOT100" class="clip-coupon kinetic magnetic mt-4 w-full px-4 py-3 rounded-2xl bg-primary text-white font-black uppercase tracking-wide">Clip</button>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-6">
+          <div class="text-accent font-heading font-black text-4xl">FREE</div>
+          <div class="mt-2 text-xl font-heading font-black">Camera Inspection</div>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Free camera inspection with paid main line cleaning.</p>
+          <div class="mt-5 rounded-2xl bg-white/40 dark:bg-slate-900/25 border border-slate-200/60 dark:border-slate-700/50 p-3 font-mono font-black text-center">SEWERFREE</div>
+          <button data-coupon="SEWERFREE" class="clip-coupon kinetic magnetic mt-4 w-full px-4 py-3 rounded-2xl bg-primary text-white font-black uppercase tracking-wide">Clip</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="py-16 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Proof</p>
+        <h2 class="mt-3 text-4xl sm:text-5xl font-heading font-black text-slate-950 dark:text-white">Customers Notice the Difference</h2>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">Replace these with real Google review excerpts.</p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div class="reveal panel rounded-3xl p-7">
+          <div class="flex items-center justify-between">
+            <div class="text-accent font-black">★★★★★</div>
+            <span class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300">Lebanon</span>
+          </div>
+          <p class="mt-4 text-slate-700 dark:text-slate-200">They showed up fast, explained the problem clearly, and fixed the leak the same day.</p>
+          <p class="mt-4 text-sm font-black">Sarah M.</p>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-7">
+          <div class="flex items-center justify-between">
+            <div class="text-accent font-black">★★★★★</div>
+            <span class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300">Lancaster</span>
+          </div>
+          <p class="mt-4 text-slate-700 dark:text-slate-200">Main line backup. They cleared it, ran a camera, and told us exactly what to do next.</p>
+          <p class="mt-4 text-sm font-black">Daniel K.</p>
+        </div>
+
+        <div class="reveal panel rounded-3xl p-7">
+          <div class="flex items-center justify-between">
+            <div class="text-accent font-black">★★★★★</div>
+            <span class="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300">Commercial</span>
+          </div>
+          <p class="mt-4 text-slate-700 dark:text-slate-200">Downtime matters. They came after hours and got us back online. Skilled and respectful.</p>
+          <p class="mt-4 text-sm font-black">Alicia R.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-slate-200/60 dark:border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="font-heading font-black text-xl text-slate-950 dark:text-white uppercase">Gill's Plumbing and Mechanical</div>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Lebanon County, Lancaster County, and nearby towns.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="#book-online" class="kinetic magnetic px-6 py-3 rounded-2xl bg-primary text-white font-black uppercase tracking-wide">Book Online</a>
+          <a href="tel:7178137478" class="kinetic magnetic px-6 py-3 rounded-2xl bg-accent text-white font-black uppercase tracking-wide hover:bg-accentHover">Call Now</a>
+        </div>
+      </div>
+      <p class="mt-8 text-xs text-slate-500 dark:text-slate-400">© <span id="year"></span> Gill's Plumbing and Mechanical. Demo booking stores locally. Connect your backend for production.</p>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    $("#year").textContent = new Date().getFullYear();
+
+    function showToast(msg) {
+      const el = $("#toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => el.classList.remove("show"), 2200);
+    }
+
+    /* THEME */
+    function setTheme(mode) {
+      const root = document.documentElement;
+      if (mode === "dark") root.classList.add("dark");
+      else root.classList.remove("dark");
+      localStorage.setItem("theme", mode);
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        setTheme(saved);
+      } else {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(prefersDark ? "dark" : "light");
+      }
+    })();
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTheme(isDark ? "light" : "dark");
+      showToast(isDark ? "Light mode" : "Dark mode");
+    }
+    $("#theme-toggle")?.addEventListener("click", toggleTheme);
+    $("#theme-toggle-mobile")?.addEventListener("click", toggleTheme);
+
+    /* MOBILE MENU */
+    const mobileBtn = $("#mobile-menu-btn");
+    const mobileMenu = $("#mobile-menu");
+    const menuIcon = $("#menu-icon");
+    const closeIcon = $("#close-icon");
+
+    function setMobileOpen(open) {
+      mobileMenu.classList.toggle("hidden", !open);
+      mobileBtn?.setAttribute("aria-expanded", open ? "true" : "false");
+      menuIcon?.classList.toggle("hidden", open);
+      closeIcon?.classList.toggle("hidden", !open);
+    }
+    mobileBtn?.addEventListener("click", () => setMobileOpen(mobileMenu.classList.contains("hidden")));
+    $$(".mobile-link").forEach(a => a.addEventListener("click", () => setMobileOpen(false)));
+    window.addEventListener("resize", () => { if (window.innerWidth >= 768) setMobileOpen(false); });
+
+    /* MAGNETIC BUTTONS */
+    function enableMagnetic(el) {
+      const strength = 14;
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2);
+        const y = e.clientY - (r.top + r.height / 2);
+        const dx = (x / r.width) * strength;
+        const dy = (y / r.height) * strength;
+        el.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.transform = "translate3d(0,0,0)";
+      });
+    }
+    $$(".magnetic").forEach(enableMagnetic);
+
+    /* REVEAL ON SCROLL WITH STAGGER */
+    (function initReveal(){
+      const els = $$(".reveal");
+      els.forEach((el, idx) => {
+        el.dataset.stagger = "1";
+        el.style.setProperty("--delay", (idx % 6) * 60 + "ms");
+      });
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((ent) => {
+          if (ent.isIntersecting) ent.target.classList.add("is-in");
+        });
+      }, { threshold: 0.12 });
+
+      els.forEach(el => {
+        if (!el.classList.contains("is-in")) io.observe(el);
+      });
+    })();
+
+    /* COUPONS CLIP */
+    $$(".clip-coupon").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const code = btn.getAttribute("data-coupon") || "";
+        try {
+          await navigator.clipboard.writeText(code);
+          showToast("Copied: " + code);
+        } catch {
+          showToast("Coupon: " + code);
+        }
+      });
+    });
+
+    /* LIVE JOBS */
+    const jobs = [
+      { title: "Drain clearing", place: "Lancaster", detail: "Kitchen sink backing up", status: "In progress", mins: 18 },
+      { title: "Water heater", place: "Lebanon", detail: "No hot water diagnosis", status: "Dispatching", mins: 6 },
+      { title: "Leak repair", place: "Ephrata", detail: "Supply line leak", status: "Completed", mins: 65 },
+      { title: "Main line", place: "Lititz", detail: "Camera inspection", status: "In progress", mins: 32 },
+      { title: "Toilet repair", place: "Manheim", detail: "Running toilet fix", status: "Completed", mins: 54 },
+      { title: "Shower drain", place: "Palmyra", detail: "Slow drain service", status: "Dispatching", mins: 14 },
+      { title: "Sewer backup", place: "Lebanon", detail: "Urgent cleanup and clearing", status: "In progress", mins: 9 },
+      { title: "Fixture install", place: "Lancaster", detail: "New faucet installation", status: "Scheduled", mins: 90 },
+    ];
+
+    function statusPill(status) {
+      const base = "inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-black border";
+      if (status === "In progress") return `<span class="${base} bg-blue-50/70 dark:bg-blue-500/10 text-primary dark:text-blue-100 border-blue-200/70 dark:border-blue-400/20">In progress</span>`;
+      if (status === "Completed") return `<span class="${base} bg-emerald-50/70 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-100 border-emerald-200/70 dark:border-emerald-400/20">Completed</span>`;
+      if (status === "Dispatching") return `<span class="${base} bg-amber-50/70 dark:bg-amber-500/10 text-amber-700 dark:text-amber-100 border-amber-200/70 dark:border-amber-400/20">Dispatching</span>`;
+      if (status === "Scheduled") return `<span class="${base} bg-slate-50/70 dark:bg-slate-500/10 text-slate-700 dark:text-slate-100 border-slate-200/70 dark:border-slate-400/20">Scheduled</span>`;
+      return `<span class="${base} bg-slate-50/70 dark:bg-slate-500/10 text-slate-700 dark:text-slate-100 border-slate-200/70 dark:border-slate-400/20">${status}</span>`;
+    }
+
+    function renderJobs() {
+      const grid = $("#jobs-grid");
+      grid.innerHTML = jobs.slice(0, 8).map((j) => `
+        <div class="kinetic panel rounded-3xl p-6 hover:shadow-lift">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-sm font-black text-slate-950 dark:text-white">${j.title}</p>
+              <p class="text-xs text-slate-500 dark:text-slate-300 mt-1">${j.place}</p>
+            </div>
+            ${statusPill(j.status)}
+          </div>
+          <p class="mt-4 text-sm text-slate-700 dark:text-slate-200">${j.detail}</p>
+          <div class="mt-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-300">
+            <span>Updated ${j.mins} min ago</span>
+            <a href="#book-online" class="kinetic magnetic font-black text-primary dark:text-white hover:underline">Request</a>
+          </div>
+        </div>
+      `).join("");
+      // re-enable magnetic on injected items
+      $$("#jobs-grid .magnetic").forEach(enableMagnetic);
+    }
+    renderJobs();
+
+    setInterval(() => {
+      jobs.forEach(j => j.mins = Math.max(1, j.mins + (Math.random() > 0.55 ? 1 : 0)));
+      const idx = Math.floor(Math.random() * jobs.length);
+      const order = ["Dispatching", "In progress", "Completed"];
+      if (order.includes(jobs[idx].status)) {
+        const next = order[Math.min(order.indexOf(jobs[idx].status) + 1, order.length - 1)];
+        jobs[idx].status = next;
+      }
+      renderJobs();
+    }, 8000);
+
+    /* BOOKING ENGINE */
+    const bookingState = { service: null, date: null, time: null };
+
+    function setStepIndicator(step) {
+      const steps = $$(".step-indicator");
+      steps.forEach(s => {
+        const sStep = Number(s.getAttribute("data-step"));
+        const circle = s.querySelector("div");
+        const label = s.querySelector("span");
+        if (sStep <= step) {
+          circle.classList.remove("bg-slate-200/80","dark:bg-slate-700/60","text-slate-600","dark:text-slate-200");
+          circle.classList.add("bg-primary","text-white");
+          label.classList.remove("text-slate-400");
+          label.classList.add("text-primary","dark:text-white");
+        } else {
+          circle.classList.add("bg-slate-200/80","dark:bg-slate-700/60","text-slate-600","dark:text-slate-200");
+          circle.classList.remove("bg-primary","text-white");
+          label.classList.add("text-slate-400");
+          label.classList.remove("text-primary","dark:text-white");
+        }
+      });
+      $("#progress-bar").style.width = (((step - 1) / 3) * 100) + "%";
+    }
+
+    function showStep(step) {
+      $$(".step-container").forEach(el => el.classList.remove("active"));
+      $("#booking-step-" + step).classList.add("active");
+      setStepIndicator(step);
+      $("#book-online").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function nextStep(step) {
+      if (step === 2 && !bookingState.service) return;
+      if (step === 3 && (!bookingState.date || !bookingState.time)) return;
+
+      if (step === 3) {
+        $("#summary-service").textContent = bookingState.service;
+        $("#summary-datetime").textContent = formatDateLong(bookingState.date) + " at " + bookingState.time;
+      }
+      showStep(step);
+    }
+
+    function prevStep(step) { showStep(step); }
+
+    function resetBooking() {
+      bookingState.service = null; bookingState.date = null; bookingState.time = null;
+      $$('input[name="service"]').forEach(r => r.checked = false);
+      $("#btn-step-1").disabled = true;
+
+      selectedDayKey = null;
+      selectedSlot = null;
+      $("#display-selected-date").textContent = "...";
+      $("#time-slots-container").innerHTML = `<p class="text-slate-500 dark:text-slate-300 text-sm italic col-span-2">Please select a date first.</p>`;
+      $("#btn-step-2").disabled = true;
+
+      $("#booking-form").reset();
+      hideErrors();
+      showStep(1);
+      showToast("Booking reset");
+    }
+
+    window.nextStep = nextStep;
+    window.prevStep = prevStep;
+    window.resetBooking = resetBooking;
+
+    $$('input[name="service"]').forEach(r => {
+      r.addEventListener("change", () => {
+        bookingState.service = r.value;
+        $("#btn-step-1").disabled = !bookingState.service;
+        // If emergency selected, suggest emergency mode via toast
+        if ((bookingState.service || "").toLowerCase().includes("emergency")) {
+          showToast("Tip: Emergency Mode prioritizes dispatch");
+        }
+      });
+    });
+
+    /* CALENDAR + TIMES */
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let viewYear = today.getFullYear();
+    let viewMonth = today.getMonth();
+    let selectedDayKey = null;
+    let selectedSlot = null;
+
+    const timeSlots = ["8:00 AM","9:00 AM","10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM"];
+
+    function formatMonthYear(y, m) {
+      return new Date(y, m, 1).toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    }
+    function dayKey(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const da = String(d.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + da;
+    }
+    function formatDateLong(d) {
+      return d.toLocaleDateString(undefined, { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+    }
+    function isPastDate(d) { return d < today; }
+
+    function getAvailableSlotsForDate(d) {
+      if (isPastDate(d)) return [];
+      if (d.getDay() === 0) return []; // Sunday
+
+      const svc = (bookingState.service || "").toLowerCase();
+      const isEmergency = svc.includes("emergency");
+      const isSat = d.getDay() === 6;
+
+      // Emergency gets more slots, including Saturdays
+      if (isEmergency) {
+        if (isSat) return ["9:00 AM","10:00 AM","12:00 PM","2:00 PM"];
+        return timeSlots.slice(0, 9); // slightly wider
+      }
+
+      // Regular: fewer slots on Saturday
+      if (isSat) return ["9:00 AM","11:00 AM","1:00 PM"];
+      return timeSlots.slice();
+    }
+
+    function renderTimeSlots(d) {
+      const container = $("#time-slots-container");
+      const slots = getAvailableSlotsForDate(d);
+
+      if (!slots.length) {
+        container.innerHTML = `<p class="text-slate-500 dark:text-slate-300 text-sm italic col-span-2">No online times available for this date. Please call for options.</p>`;
+        $("#btn-step-2").disabled = true;
+        selectedSlot = null; bookingState.time = null;
+        return;
+      }
+
+      container.innerHTML = slots.map(t => `
+        <button type="button"
+          class="time-slot kinetic magnetic px-3 py-3 border border-slate-200/70 dark:border-slate-700/60 bg-white/40 dark:bg-slate-900/25 rounded-2xl text-sm font-black text-slate-800 dark:text-slate-100 hover:shadow-soft"
+          data-time="${t}">
+          ${t}
+        </button>
+      `).join("");
+
+      $$("#time-slots-container .time-slot").forEach(btn => {
+        enableMagnetic(btn);
+        btn.addEventListener("click", () => {
+          $$("#time-slots-container .time-slot").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          selectedSlot = btn.getAttribute("data-time");
+          bookingState.time = selectedSlot;
+          $("#btn-step-2").disabled = !(bookingState.date && bookingState.time);
+          showToast("Time selected");
+        });
+      });
+    }
+
+    function renderCalendar() {
+      $("#calendar-month-year").textContent = formatMonthYear(viewYear, viewMonth);
+      const body = $("#calendar-body");
+      body.innerHTML = "";
+
+      const first = new Date(viewYear, viewMonth, 1);
+      const last = new Date(viewYear, viewMonth + 1, 0);
+      const startDay = first.getDay();
+      const daysInMonth = last.getDate();
+
+      for (let i = 0; i < startDay; i++) {
+        const div = document.createElement("div");
+        div.className = "calendar-day empty";
+        body.appendChild(div);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const d = new Date(viewYear, viewMonth, day);
+        const key = dayKey(d);
+        const disabled = isPastDate(d) || d.getDay() === 0;
+        const hasSlots = getAvailableSlotsForDate(d).length > 0;
+
+        const div = document.createElement("div");
+        div.className = "calendar-day " + ((disabled || !hasSlots) ? "disabled" : "");
+        div.textContent = String(day);
+
+        if (selectedDayKey && selectedDayKey === key) div.classList.add("selected");
+
+        if (!disabled && hasSlots) {
+          div.addEventListener("click", () => {
+            $$("#calendar-body .calendar-day").forEach(x => x.classList.remove("selected"));
+            div.classList.add("selected");
+            selectedDayKey = key;
+            bookingState.date = d;
+            $("#display-selected-date").textContent = formatDateLong(d);
+
+            selectedSlot = null; bookingState.time = null;
+            $("#btn-step-2").disabled = true;
+
+            renderTimeSlots(d);
+          });
+        }
+
+        body.appendChild(div);
+      }
+    }
+
+    $("#prev-month").addEventListener("click", () => {
+      viewMonth -= 1;
+      if (viewMonth < 0) { viewMonth = 11; viewYear -= 1; }
+      renderCalendar();
+    });
+    $("#next-month").addEventListener("click", () => {
+      viewMonth += 1;
+      if (viewMonth > 11) { viewMonth = 0; viewYear += 1; }
+      renderCalendar();
+    });
+    renderCalendar();
+
+    /* FORM SUBMIT */
+    function hideErrors() {
+      ["firstName","lastName","phone","address"].forEach(id => $("#err-" + id).classList.add("hidden"));
+    }
+    function normalizePhone(raw) {
+      const digits = (raw || "").replace(/\D/g, "");
+      if (digits.length === 11 && digits.startsWith("1")) return digits.slice(1);
+      if (digits.length === 10) return digits;
+      return null;
+    }
+    function validateForm() {
+      hideErrors();
+      let ok = true;
+      const firstName = $("#firstName").value.trim();
+      const lastName = $("#lastName").value.trim();
+      const phoneRaw = $("#phone").value.trim();
+      const address = $("#address").value.trim();
+
+      if (!firstName) { $("#err-firstName").classList.remove("hidden"); ok = false; }
+      if (!lastName) { $("#err-lastName").classList.remove("hidden"); ok = false; }
+      if (!address) { $("#err-address").classList.remove("hidden"); ok = false; }
+
+      const phone = normalizePhone(phoneRaw);
+      if (!phone) { $("#err-phone").classList.remove("hidden"); ok = false; }
+
+      return { ok, firstName, lastName, phone, address };
+    }
+
+    $("#booking-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (!bookingState.service || !bookingState.date || !bookingState.time) {
+        showToast("Please complete steps 1 and 2 first.");
+        return;
+      }
+
+      const v = validateForm();
+      if (!v.ok) {
+        showToast("Please fix the highlighted fields.");
+        return;
+      }
+
+      const payload = {
+        service: bookingState.service,
+        date: dayKey(bookingState.date),
+        time: bookingState.time,
+        firstName: v.firstName,
+        lastName: v.lastName,
+        phone: v.phone,
+        email: $("#email").value.trim() || null,
+        address: v.address,
+        notes: $("#notes").value.trim() || null,
+        consentText: $("#consent").checked,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        const prev = JSON.parse(localStorage.getItem("gills_bookings") || "[]");
+        prev.unshift(payload);
+        localStorage.setItem("gills_bookings", JSON.stringify(prev.slice(0, 25)));
+      } catch {}
+
+      $("#success-datetime").textContent = formatDateLong(bookingState.date) + " at " + bookingState.time;
+      showStep(4);
+      showToast("Request submitted");
+    });
+
+    /* EMERGENCY MODE: MORPH THE SITE */
+    let emergencyMode = false;
+
+    function setEmergencyMode(on) {
+      emergencyMode = on;
+
+      // Collapse non essential sections
+      const coupons = $("#coupons");
+      const reviews = $("#reviews");
+      const navCoupons = $("#nav-coupons");
+      const navReviews = $("#nav-reviews");
+      const mobileCoupons = $("#mobile-coupons");
+      const mobileReviews = $("#mobile-reviews");
+
+      if (on) {
+        coupons.style.display = "none";
+        reviews.style.display = "none";
+        if (navCoupons) navCoupons.style.display = "none";
+        if (navReviews) navReviews.style.display = "none";
+        if (mobileCoupons) mobileCoupons.style.display = "none";
+        if (mobileReviews) mobileReviews.style.display = "none";
+
+        // Move booking and jobs to top insert region
+        const insert = $("#emergency-insert");
+        const booking = $("#book-online");
+        const jobsSection = $("#current-jobs");
+
+        // Create an emergency panel at top
+        insert.innerHTML = `
+          <div class="mt-6 mb-2 reveal is-in panel rounded-3xl p-6 sm:p-7 border border-rose-200/70 dark:border-rose-400/20">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div>
+                <p class="text-xs font-black uppercase tracking-[0.26em] text-slate-500 dark:text-slate-300">Emergency Mode Enabled</p>
+                <h3 class="mt-2 text-3xl font-heading font-black text-slate-950 dark:text-white">We prioritize dispatch now.</h3>
+                <p class="mt-2 text-slate-600 dark:text-slate-300">Booking and live jobs moved to the top. Coupons and reviews collapsed.</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a href="tel:7178137478" class="kinetic magnetic px-7 py-4 rounded-2xl bg-accent text-white font-black uppercase tracking-wide shadow-lift hover:bg-accentHover text-center">Call Now</a>
+                <a href="#book-online" class="kinetic magnetic px-7 py-4 rounded-2xl bg-primary text-white font-black uppercase tracking-wide shadow-lift text-center">Book Emergency</a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        insert.after(jobsSection);
+        insert.after(booking);
+
+        // Set service selection to emergency if none
+        if (!bookingState.service) {
+          const emergencyRadio = $$('input[name="service"]').find(r => (r.value || "").toLowerCase().includes("emergency"));
+          if (emergencyRadio) {
+            emergencyRadio.checked = true;
+            bookingState.service = emergencyRadio.value;
+            $("#btn-step-1").disabled = false;
+            renderCalendar(); // availability changes with service
+          }
+        }
+
+        showToast("Emergency mode enabled");
+      } else {
+        coupons.style.display = "";
+        reviews.style.display = "";
+        if (navCoupons) navCoupons.style.display = "";
+        if (navReviews) navReviews.style.display = "";
+        if (mobileCoupons) mobileCoupons.style.display = "";
+        if (mobileReviews) mobileReviews.style.display = "";
+
+        $("#emergency-insert").innerHTML = "";
+        showToast("Emergency mode off");
+      }
+
+      // If user already selected a date, rerender time slots with the new availability rules
+      if (bookingState.date) renderTimeSlots(bookingState.date);
+      renderCalendar();
+    }
+
+    $("#emergency-mode-btn").addEventListener("click", () => setEmergencyMode(!emergencyMode));
+    $("#hero-emergency-mode").addEventListener("click", () => setEmergencyMode(true));
+    $("#services-emergency-mode").addEventListener("click", () => setEmergencyMode(true));
+  </script>
+</body>
+</html>

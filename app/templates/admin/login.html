@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f7fb; margin: 0; }
+    .wrap { max-width: 420px; margin: 80px auto; background: #fff; border: 1px solid #dbe1ea; border-radius: 12px; padding: 24px; }
+    h1 { margin: 0 0 18px; font-size: 24px; }
+    label { display: block; margin: 12px 0 6px; font-weight: 700; }
+    input { width: 100%; box-sizing: border-box; padding: 10px; border-radius: 8px; border: 1px solid #c6cfdb; }
+    button { margin-top: 16px; width: 100%; background: #0b2a4a; color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    .flash { margin: 0 0 10px; padding: 10px; border-radius: 8px; border: 1px solid #d9b6b6; background: #fff1f1; color: #7d1f1f; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Admin Login</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required />
+      <button type="submit">Sign In</button>
+    </form>
+    <p style="margin-top:14px;color:#5a6575;font-size:13px;">Default: <code>admin / change-me</code></p>
+  </div>
+</body>
+</html>
